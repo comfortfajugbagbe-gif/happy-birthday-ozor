@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Ozor | The Celebration Starts Now</title>
+    <title>For Ozor | The Party Starts Now</title>
     <style>
         :root {
             --primary: #d4af37; 
             --bg: #0a0b10;
             --glass: rgba(255, 255, 255, 0.05);
-            --text: #e0e0e0;
+            --cake: #4d2a15; 
+            --cream: #fcfaf9; 
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background: var(--bg);
-            color: var(--text);
+            color: #e0e0e0;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             display: flex;
@@ -23,8 +24,7 @@
         }
 
         .background-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #1a1c2c 0%, #0a0b10 100%);
             z-index: -1;
         }
@@ -39,77 +39,84 @@
             100% { transform: translate(110vw, -10vh) rotate(360deg); }
         }
 
-        .container { width: 90%; max-width: 450px; padding: 60px 0; z-index: 10; }
+        .container { width: 90%; max-width: 450px; padding: 40px 0; z-index: 10; }
 
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
-            padding: 40px;
+            padding: 35px;
             text-align: center;
             display: none;
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
 
         .active { display: block !important; animation: fadeIn 0.8s ease forwards; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- THE CAKE --- */
+        .cake-container {
+            position: relative; width: 200px; height: 200px; margin: 40px auto;
         }
 
-        .slideshow-container {
-            width: 100%; height: 380px; border-radius: 20px;
-            background-size: cover; background-position: center;
-            border: 1px solid var(--primary); margin-bottom: 25px;
-            transition: background-image 1.2s ease-in-out;
+        .layer {
+            position: absolute; width: 100%; background: var(--cake);
+            border-radius: 50% / 20%;
+            opacity: 0; transform: translateY(40px);
+            transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 0px #33240b;
+        }
+
+        .bottom-layer { height: 70px; bottom: 0; z-index: 1; }
+        .mid-layer { height: 60px; bottom: 45px; width: 85%; left: 7.5%; z-index: 2; }
+        .top-layer { height: 50px; bottom: 85px; width: 70%; left: 15%; z-index: 3; }
+
+        .icing {
+            position: absolute; top: -5px; left: 0; width: 100%; height: 25px;
+            background: var(--cream); border-radius: 50% 50% 0 0;
+        }
+        .drip {
+            position: absolute; width: 12px; height: 25px;
+            background: var(--cream); border-radius: 0 0 10px 10px;
+            top: 15px;
+        }
+
+        .candle {
+            position: absolute; width: 8px; height: 35px;
+            background: #ff4d6d; bottom: 125px; z-index: 10;
+            border-radius: 2px; opacity: 0; transition: 1s;
+        }
+        .flame {
+            position: absolute; width: 10px; height: 15px;
+            background: #ffa500; border-radius: 50% 50% 20% 20%;
+            top: -18px; left: -1px;
+            box-shadow: 0 0 10px #ff4500;
+            animation: flicker 0.6s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) skewX(2deg); opacity: 0.8; }
+            100% { transform: scale(1.1) skewX(-2deg); opacity: 1; }
         }
 
         .btn {
             background: var(--primary); color: #000; border: none;
-            padding: 16px 35px; border-radius: 50px; font-weight: 700;
+            padding: 16px 30px; border-radius: 50px; font-weight: 800;
             cursor: pointer; text-transform: uppercase; margin-top: 15px;
         }
 
-        .envelope-wrapper {
-            position: relative; width: 220px; height: 150px;
-            background: #8b0000; margin: 60px auto; cursor: pointer;
-            perspective: 1000px;
-        }
-        .flap {
-            position: absolute; top: 0; left: 0;
-            border-left: 110px solid transparent; border-right: 110px solid transparent;
-            border-top: 90px solid #b22222; transition: 0.6s; transform-origin: top; z-index: 3;
-        }
-        .letter {
-            position: absolute; bottom: 5px; left: 10px;
-            width: 200px; height: 130px; background: #fff; color: #222;
-            padding: 20px; font-size: 0.9rem; transition: 0.6s; z-index: 2;
-            overflow-y: auto; text-align: left; line-height: 1.5; box-sizing: border-box;
-        }
-        .open .flap { transform: rotateX(180deg); z-index: 1; }
-        .open .letter { transform: translateY(-110px); height: 280px; width: 300px; left: -40px; z-index: 10; }
-
-        .cake-box {
-            position: relative; width: 180px; height: 0; background: #3d251e;
-            margin: 80px auto 20px; border-radius: 10px 10px 0 0;
-            transition: 1.5s ease-out;
-        }
-        .icing-top {
-            position: absolute; top: 0; left: 0; width: 100%; height: 0;
-            background: #fcfaf9; border-radius: 10px 10px 40% 40%; transition: 1s 1.2s;
-        }
-        .ozor-gold {
-            opacity: 0; font-size: 2.2rem; color: var(--primary);
-            font-weight: 900; transition: 1s 2.2s; letter-spacing: 6px;
+        .video-box {
+            border-radius: 15px; overflow: hidden; margin: 20px 0;
+            border: 1px solid var(--primary);
         }
 
-        .list-item {
-            text-align: left; margin: 15px 0; padding-left: 15px;
-            border-left: 3px solid var(--primary); opacity: 0; transform: translateX(-10px);
-            transition: 0.5s;
+        .slideshow-container {
+            width: 100%; height: 350px; border-radius: 20px;
+            background-size: cover; background-position: center;
+            border: 1px solid var(--primary); margin-bottom: 20px;
         }
     </style>
 </head>
@@ -118,55 +125,52 @@
 <div class="background-overlay"></div>
 
 <div class="container">
+    <!-- SCREEN 1 -->
     <div class="glass-card active" id="s1">
-        <h1 style="color:var(--primary); font-size: 2.2rem;">Hey Ozor...</h1>
-        <p>So, you thought you could have a birthday and not tell me? Nice try. Since I just found out, the party officially starts <b>now</b>.</p>
-        <button class="btn" onclick="initiate()">Unlock the Vibe</button>
+        <h1 style="color:var(--primary);">Hey Ozor...</h1>
+        <p>So, you thought you could have a birthday and not tell me? Nice try. Since it's <b>my</b> free will to celebrate you, the party starts now.</p>
+        
+        <p style="font-size: 0.8rem; opacity: 0.7;">🎵 Hit play for the full experience</p>
+        <div class="video-box">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/S_8HInD7FTo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <button class="btn" onclick="goToNext(1)">I'm ready</button>
     </div>
 
+    <!-- SCREEN 2: GALLERY -->
     <div class="glass-card" id="s2">
         <div class="slideshow-container" id="slideshow"></div>
-        <h3>You've got that main character energy.</h3>
+        <p>A legend like you deserves the main character treatment.</p>
         <button class="btn" onclick="goToNext(2)">There's more...</button>
     </div>
 
+    <!-- SCREEN 3: NOTES -->
     <div class="glass-card" id="s3">
         <h2 style="color:var(--primary)">Why you're top-tier:</h2>
-        <div class="list-item" id="r1"><strong>01. The Brain:</strong> As a developer, your mind is genuinely inspiring.</div>
-        <div class="list-item" id="r2"><strong>02. The Voice:</strong> I lowkey love the way you call my name. It's distinct.</div>
-        <div class="list-item" id="r3"><strong>03. The Kindness:</strong> You've been so nice lately, it hasn't gone unnoticed.</div>
-        <div class="list-item" id="r4"><strong>04. The Loyalty:</strong> I value our friendship more than I say.</div>
-        <button class="btn" onclick="goToNext(3)">Open My Note</button>
+        <p style="text-align:left">💻 <b>The Dev Mind:</b> Watching you work is pure magic.</p>
+        <p style="text-align:left">🗣️ <b>The Name:</b> I lowkey love the way you call my name.</p>
+        <p style="text-align:left">✨ <b>The Kindness:</b> You've been so nice lately, it hasn't gone unnoticed.</p>
+        <p style="text-align:left">⚖️ <b>The Law:</b> If you ever ghost me again... we meet in court. 😉</p>
+        <button class="btn" onclick="goToNext(3)">The Big Reveal</button>
     </div>
 
+    <!-- SCREEN 4: THE CAKE -->
     <div class="glass-card" id="s4">
-        <div class="envelope-wrapper" id="envelope" onclick="this.classList.toggle('open')">
-            <div class="flap"></div>
-            <div class="letter">
-                <strong>Ozor,</strong><br><br>
-                You kept your birthday a secret? Bold move. But you're such a fantastic friend that even finding out days later, I couldn't just let it slide.<br><br>
-                You’re a brilliant soul and an even better friend. I hope you know how much you are appreciated. <br><br>
-                Fair warning: <strong>If you ever ghost me again ehn... lol, we will meet in court!</strong> I've already got my lawyers on standby. 😉<br><br>
-                Happy Belated Birthday, Legend!
-            </div>
+        <h1 style="color:var(--primary); font-size: 2.2rem; margin-bottom: 0;">O Z O R</h1>
+        <div class="cake-container">
+            <div class="layer bottom-layer" id="lb"><div class="icing"></div><div class="drip" style="left:20px; height:35px;"></div><div class="drip" style="left:80px;"></div><div class="drip" style="right:30px; height:40px;"></div></div>
+            <div class="layer mid-layer" id="lm"><div class="icing"></div><div class="drip" style="left:30px;"></div><div class="drip" style="right:40px; height:30px;"></div></div>
+            <div class="layer top-layer" id="lt"><div class="icing"></div></div>
+            
+            <div class="candle" id="c1" style="left: 60px;"><div class="flame"></div></div>
+            <div class="candle" id="c2" style="left: 95px;"><div class="flame"></div></div>
+            <div class="candle" id="c3" style="left: 130px;"><div class="flame"></div></div>
         </div>
-        <p style="margin-top:140px; font-style: italic; opacity: 0.6;">Tap the envelope to read</p>
-        <button class="btn" onclick="goToNext(4)">The Final Reveal</button>
-    </div>
-
-    <div class="glass-card" id="s5">
-        <div class="cake-box" id="cake">
-            <div class="icing-top" id="icing"></div>
-        </div>
-        <div class="ozor-gold" id="ozor-name">OZOR</div>
-        <h1 style="margin-top:20px;">HAPPY BIRTHDAY!</h1>
-        <p>A celebration of free will and great friendship.</p>
+        <h2 style="color:var(--primary);">HAPPY BIRTHDAY!</h2>
+        <p>"To the nights we don't remember, <br>with friends we won't forget."</p>
     </div>
 </div>
-
-<audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
-</audio>
 
 <script>
     const images = [
@@ -178,47 +182,27 @@
         "https://i.postimg.cc/d02YgFSJ/Screenshot-2026-04-15-141922.png"
     ];
 
-    function initiate() {
-        goToNext(1);
-        const music = document.getElementById('bgMusic');
-        music.play().catch(e => console.log("Audio play blocked"));
-        startSlideshow();
-    }
+    function goToNext(n) {
+        document.querySelectorAll('.glass-card').forEach(c => c.classList.remove('active'));
+        const next = document.getElementById('s' + (n + 1));
+        if(next) next.classList.add('active');
 
-    function goToNext(current) {
-        const cards = document.querySelectorAll('.glass-card');
-        cards.forEach(c => c.classList.remove('active'));
-        
-        const nextID = 's' + (current + 1);
-        const nextCard = document.getElementById(nextID);
-        if(nextCard) {
-            nextCard.classList.add('active');
-        }
+        if(n === 1) startSlideshow();
 
-        if(current === 2) {
-            for(let i=1; i<=4; i++) {
-                setTimeout(() => {
-                    const item = document.getElementById('r'+i);
-                    if(item) {
-                        item.style.opacity = "1";
-                        item.style.transform = "translateX(0)";
-                    }
-                }, i * 400);
-            }
-        }
-
-        if(current === 4) {
-            setTimeout(() => {
-                document.getElementById('cake').style.height = "120px";
-                document.getElementById('icing').style.height = "35px";
-                document.getElementById('ozor-name').style.opacity = "1";
-            }, 500);
+        if(n === 3) {
+            setTimeout(() => { document.getElementById('lb').style.opacity = "1"; document.getElementById('lb').style.transform = "translateY(0)"; }, 500);
+            setTimeout(() => { document.getElementById('lm').style.opacity = "1"; document.getElementById('lm').style.transform = "translateY(0)"; }, 1200);
+            setTimeout(() => { document.getElementById('lt').style.opacity = "1"; document.getElementById('lt').style.transform = "translateY(0)"; }, 1900);
+            setTimeout(() => { 
+                document.getElementById('c1').style.opacity = "1"; 
+                document.getElementById('c2').style.opacity = "1"; 
+                document.getElementById('c3').style.opacity = "1"; 
+            }, 2800);
         }
     }
 
     function startSlideshow() {
         const slide = document.getElementById('slideshow');
-        if(!slide) return;
         let i = 0;
         slide.style.backgroundImage = `url(${images[0]})`;
         setInterval(() => {
@@ -237,6 +221,9 @@
         p.style.animationDelay = (Math.random() * 10) + "s";
         document.body.appendChild(p);
     }
+</script>
+</body>
+</html>
 </script>
 
 </body>
