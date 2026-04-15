@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ozor | The Celebration Starts Now</title>
+    <title>For Ozor | The Celebration Starts Now</title>
     <style>
         :root {
             --primary: #d4af37; 
@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* --- STARS & BUTTERFLIES BACKGROUND --- */
+        /* --- BACKGROUND: STARS & BUTTERFLIES --- */
         .background-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #1a1c2c 0%, #0a0b10 100%);
@@ -36,14 +36,14 @@
 
         .butterfly {
             position: fixed; pointer-events: none; z-index: 1; font-size: 1.5rem;
-            animation: floatAround 15s linear infinite; opacity: 0.6;
+            animation: floatAround 15s linear infinite;
         }
         @keyframes floatAround {
             0% { transform: translate(-10vw, 110vh) rotate(0deg); }
             100% { transform: translate(110vw, -10vh) rotate(360deg); }
         }
 
-        /* --- CONTAINERS --- */
+        /* --- LAYOUT --- */
         .container { 
             width: 90%; max-width: 450px; margin: 0 auto; 
             padding: 40px 0; z-index: 10; text-align: center;
@@ -63,9 +63,9 @@
         .active { display: block !important; animation: fadeIn 1s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- IMAGE SLIDESHOW --- */
-        .slideshow-container {
-            width: 100%; height: 380px; border-radius: 20px;
+        /* --- SLIDESHOW --- */
+        .slideshow {
+            width: 100%; height: 350px; border-radius: 20px;
             background-size: cover; background-position: center;
             border: 1px solid var(--primary); margin: 20px 0;
             transition: 1s ease-in-out;
@@ -100,8 +100,8 @@
         .open .flap { transform: rotateX(180deg); z-index: 1; }
         .open .letter { transform: translateY(-120px); height: 280px; width: 300px; left: -40px; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* --- 3-LAYER CAKE --- */
-        .cake-container { position: relative; width: 200px; height: 220px; margin: 40px auto; }
+        /* --- CAKE --- */
+        .cake-container { position: relative; width: 200px; height: 200px; margin: 40px auto; }
         .layer {
             position: absolute; width: 100%; background: var(--cake);
             border-radius: 50% / 20%; opacity: 0; transform: translateY(40px);
@@ -124,22 +124,27 @@
 
 <div class="background-overlay" id="bg"></div>
 
+<!-- SOLEMN BACKGROUND MUSIC -->
+<audio id="solemnMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
-    <!-- SCREEN 1: THE HOOK -->
+    <!-- 1. INTRO -->
     <div class="glass-card active" id="s1">
         <h1 style="color:var(--primary); font-size: 2.2rem;">Hey Ozor...</h1>
-        <p>You thought you could have a birthday and I wouldn't find out? Nice try. I just heard the news, and because I actually value you, I’m starting the celebration <b>now</b>.</p>
+        <p>So you thought you could have a birthday and not tell me? Bold move. Since I have <b>free will</b>, the party officially starts now.</p>
         <button class="btn" onclick="initiate()">Unlock the Vibe</button>
     </div>
 
-    <!-- SCREEN 2: PICTURE SLIDESHOW -->
+    <!-- 2. PICTURE SLIDE -->
     <div class="glass-card" id="s2">
-        <div class="slideshow-container" id="slideshow"></div>
-        <h3>You've got that main character energy.</h3>
-        <button class="btn" onclick="goToNext(2)">Keep Going...</button>
+        <div class="slideshow" id="slideshow"></div>
+        <h3>You really are a legend, man.</h3>
+        <button class="btn" onclick="goToNext(2)">There's more...</button>
     </div>
 
-    <!-- SCREEN 3: THINGS I LIKE -->
+    <!-- 3. THINGS I LIKE -->
     <div class="glass-card" id="s3">
         <h2 style="color:var(--primary);">What I like about you:</h2>
         <div class="reason-item" id="r1"><span class="reason-title">The "Dev" Magic</span> "I love how your brain works. You don’t just see problems; you see solutions. It’s a superpower."</div>
@@ -149,23 +154,23 @@
         <button class="btn" onclick="goToNext(3)">Open My Note</button>
     </div>
 
-    <!-- SCREEN 4: ENVELOPE (HUMOR) -->
+    <!-- 4. ENVELOPE (HUMOR) -->
     <div class="glass-card" id="s4">
         <div class="envelope-wrapper" id="envelope" onclick="this.classList.toggle('open')">
             <div class="flap"></div>
             <div class="letter">
                 <strong>Ozor,</strong><br><br>
                 You kept your birthday a secret? Bold move. But you're such a fantastic friend that even finding out days later, I couldn't just let it slide.<br><br>
-                You’re a brilliant soul and an even better friend. I hope you know how much you are appreciated. <br><br>
+                You’re a brilliant soul and an even better friend. I hope you know how much you are appreciated.<br><br>
                 <b>Fair warning:</b> If you ever ghost me again ehn... lol, we will meet in court! I've already got my lawyers on standby. 😉<br><br>
                 Happy Birthday, Legend!
             </div>
         </div>
         <p style="margin-top:140px; font-style: italic; opacity: 0.6;">Tap the envelope to open</p>
-        <button class="btn" onclick="goToNext(4)">The Final Reveal</button>
+        <button class="btn" onclick="goToNext(4)">Final Reveal</button>
     </div>
 
-    <!-- SCREEN 5: CAKE -->
+    <!-- 5. CAKE -->
     <div class="glass-card" id="s5">
         <h1 style="color:var(--primary); font-size: 2.2rem; margin-bottom: 0;">O Z O R</h1>
         <div class="cake-container">
@@ -181,10 +186,6 @@
     </div>
 </div>
 
-<audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
-</audio>
-
 <script>
     const images = [
         "https://i.postimg.cc/kG5nPHkS/Screenshot-2026-04-15-142031.png",
@@ -196,8 +197,9 @@
     ];
 
     function initiate() {
+        document.getElementById('solemnMusic').play().catch(e => console.log("Music play triggered"));
         goToNext(1);
-        document.getElementById('bgMusic').play().catch(e => console.log("Audio blocked"));
+        startSlideshow();
     }
 
     function goToNext(n) {
@@ -205,12 +207,14 @@
         const next = document.getElementById('s' + (n + 1));
         if(next) next.classList.add('active');
 
-        if(n === 1) startSlideshow();
+        // Animation for List
         if(n === 2) {
             for(let i=1; i<=4; i++) {
                 setTimeout(() => { document.getElementById('r'+i).classList.add('show'); }, i * 600);
             }
         }
+
+        // Animation for Cake
         if(n === 4) {
             setTimeout(() => { document.getElementById('lb').style.opacity = "1"; document.getElementById('lb').style.transform = "translateY(0)"; }, 500);
             setTimeout(() => { document.getElementById('lm').style.opacity = "1"; document.getElementById('lm').style.transform = "translateY(0)"; }, 1200);
@@ -236,7 +240,7 @@
         star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
         bg.appendChild(star);
     }
-    const particles = ['🦋', '✨', '⭐'];
+    const particles = ['🦋', '✨', '⭐', '🦋'];
     for(let i=0; i<12; i++) {
         const p = document.createElement('div');
         p.className = 'butterfly';
