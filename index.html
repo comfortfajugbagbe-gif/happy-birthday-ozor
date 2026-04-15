@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Ozor | The Party Starts Now</title>
+    <title>Ozor | The Celebration Starts Now</title>
     <style>
         :root {
             --primary: #d4af37; 
@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* --- AMBIENT BACKGROUND (STARS & BUTTERFLIES) --- */
+        /* --- STARS & BUTTERFLIES BACKGROUND --- */
         .background-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, #1a1c2c 0%, #0a0b10 100%);
@@ -46,7 +46,7 @@
         /* --- CONTAINERS --- */
         .container { 
             width: 90%; max-width: 450px; margin: 0 auto; 
-            padding: 60px 0; z-index: 10; text-align: center;
+            padding: 40px 0; z-index: 10; text-align: center;
         }
 
         .glass-card {
@@ -63,6 +63,14 @@
         .active { display: block !important; animation: fadeIn 1s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- IMAGE SLIDESHOW --- */
+        .slideshow-container {
+            width: 100%; height: 380px; border-radius: 20px;
+            background-size: cover; background-position: center;
+            border: 1px solid var(--primary); margin: 20px 0;
+            transition: 1s ease-in-out;
+        }
+
         /* --- THINGS I LIKE LIST --- */
         .reason-item {
             text-align: left; margin: 20px 0; padding-left: 15px;
@@ -72,7 +80,7 @@
         .reason-item.show { opacity: 1; transform: translateX(0); }
         .reason-title { color: var(--primary); font-weight: bold; display: block; margin-bottom: 5px; }
 
-        /* --- ENVELOPE & LETTER --- */
+        /* --- ENVELOPE --- */
         .envelope-wrapper {
             position: relative; width: 220px; height: 150px;
             background: #8b0000; margin: 60px auto; cursor: pointer;
@@ -92,7 +100,7 @@
         .open .flap { transform: rotateX(180deg); z-index: 1; }
         .open .letter { transform: translateY(-120px); height: 280px; width: 300px; left: -40px; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* --- 3D CAKE --- */
+        /* --- 3-LAYER CAKE --- */
         .cake-container { position: relative; width: 200px; height: 220px; margin: 40px auto; }
         .layer {
             position: absolute; width: 100%; background: var(--cake);
@@ -105,7 +113,6 @@
         .top-layer { height: 50px; bottom: 85px; width: 70%; left: 15%; z-index: 3; }
         .icing { position: absolute; top: -5px; left: 0; width: 100%; height: 25px; background: var(--cream); border-radius: 50% 50% 0 0; }
         .drip { position: absolute; width: 12px; height: 25px; background: var(--cream); border-radius: 0 0 10px 10px; top: 15px; }
-
         .candle { position: absolute; width: 8px; height: 35px; background: #ff4d6d; bottom: 125px; z-index: 10; border-radius: 2px; opacity: 0; transition: 1s; }
         .flame { position: absolute; width: 10px; height: 15px; background: #ffa500; border-radius: 50% 50% 20% 20%; top: -18px; left: -1px; box-shadow: 0 0 10px #ff4500; animation: flicker 0.6s infinite alternate; }
         @keyframes flicker { 0% { transform: scale(1) skewX(2deg); opacity: 0.8; } 100% { transform: scale(1.1) skewX(-2deg); opacity: 1; } }
@@ -118,55 +125,48 @@
 <div class="background-overlay" id="bg"></div>
 
 <div class="container">
-    <!-- SCREEN 1: INTRO -->
+    <!-- SCREEN 1: THE HOOK -->
     <div class="glass-card active" id="s1">
         <h1 style="color:var(--primary); font-size: 2.2rem;">Hey Ozor...</h1>
-        <p>You thought you could have a birthday and not tell me? Bold move. Since I have <b>free will</b>, the party starts now.</p>
+        <p>You thought you could have a birthday and I wouldn't find out? Nice try. I just heard the news, and because I actually value you, I’m starting the celebration <b>now</b>.</p>
         <button class="btn" onclick="initiate()">Unlock the Vibe</button>
     </div>
 
-    <!-- SCREEN 2: THINGS I LIKE -->
+    <!-- SCREEN 2: PICTURE SLIDESHOW -->
     <div class="glass-card" id="s2">
-        <h2 style="color:var(--primary);">Why you're one of a kind:</h2>
-        
-        <div class="reason-item" id="r1">
-            <span class="reason-title">The "Dev" Magic</span>
-            "I love how your brain works. You don’t just see problems; you see solutions. It’s a superpower."
-        </div>
-        <div class="reason-item" id="r2">
-            <span class="reason-title">The Unmatched Kindness</span>
-            "You’ve been so incredibly nice to me lately. It hasn't gone unnoticed, and it means more than I probably say."
-        </div>
-        <div class="reason-item" id="r3">
-            <span class="reason-title">The Calm in the Storm</span>
-            "You have this way of making everything feel handled. You’re a safe harbor for the people around you."
-        </div>
-        <div class="reason-item" id="r4">
-            <span class="reason-title">The Quiet Ambition</span>
-            "Watching you work and grow is inspiring. You don't brag; you just execute."
-        </div>
-
-        <button class="btn" onclick="goToNext(2)">There's more...</button>
+        <div class="slideshow-container" id="slideshow"></div>
+        <h3>You've got that main character energy.</h3>
+        <button class="btn" onclick="goToNext(2)">Keep Going...</button>
     </div>
 
-    <!-- SCREEN 3: ENVELOPE -->
+    <!-- SCREEN 3: THINGS I LIKE -->
     <div class="glass-card" id="s3">
+        <h2 style="color:var(--primary);">What I like about you:</h2>
+        <div class="reason-item" id="r1"><span class="reason-title">The "Dev" Magic</span> "I love how your brain works. You don’t just see problems; you see solutions. It’s a superpower."</div>
+        <div class="reason-item" id="r2"><span class="reason-title">The Unmatched Kindness</span> "You’ve been so incredibly nice to me lately. It hasn't gone unnoticed, and it means more than I probably say."</div>
+        <div class="reason-item" id="r3"><span class="reason-title">The Calm in the Storm</span> "You have this way of making everything feel handled. You’re a safe harbor for the people around you."</div>
+        <div class="reason-item" id="r4"><span class="reason-title">The Quiet Ambition</span> "Watching you work and grow is inspiring. You don't brag; you just execute."</div>
+        <button class="btn" onclick="goToNext(3)">Open My Note</button>
+    </div>
+
+    <!-- SCREEN 4: ENVELOPE (HUMOR) -->
+    <div class="glass-card" id="s4">
         <div class="envelope-wrapper" id="envelope" onclick="this.classList.toggle('open')">
             <div class="flap"></div>
             <div class="letter">
                 <strong>Ozor,</strong><br><br>
-                I am so sorry I didn't know it was your birthday last Saturday! I wanted to build this just to show you that you are loved.<br><br>
-                You’re a brilliant soul and an even better friend. <br><br>
+                You kept your birthday a secret? Bold move. But you're such a fantastic friend that even finding out days later, I couldn't just let it slide.<br><br>
+                You’re a brilliant soul and an even better friend. I hope you know how much you are appreciated. <br><br>
                 <b>Fair warning:</b> If you ever ghost me again ehn... lol, we will meet in court! I've already got my lawyers on standby. 😉<br><br>
-                Happy Belated Birthday, Legend!
+                Happy Birthday, Legend!
             </div>
         </div>
         <p style="margin-top:140px; font-style: italic; opacity: 0.6;">Tap the envelope to open</p>
-        <button class="btn" onclick="goToNext(3)">Final Reveal</button>
+        <button class="btn" onclick="goToNext(4)">The Final Reveal</button>
     </div>
 
-    <!-- SCREEN 4: CAKE -->
-    <div class="glass-card" id="s4">
+    <!-- SCREEN 5: CAKE -->
+    <div class="glass-card" id="s5">
         <h1 style="color:var(--primary); font-size: 2.2rem; margin-bottom: 0;">O Z O R</h1>
         <div class="cake-container">
             <div class="layer bottom-layer" id="lb"><div class="icing"></div><div class="drip" style="left:20px; height:35px;"></div><div class="drip" style="left:80px;"></div><div class="drip" style="right:30px; height:40px;"></div></div>
@@ -181,15 +181,23 @@
     </div>
 </div>
 
-<!-- SOLEMN PIANO MUSIC -->
-<audio id="solemnMusic" loop>
+<audio id="bgMusic" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+    const images = [
+        "https://i.postimg.cc/kG5nPHkS/Screenshot-2026-04-15-142031.png",
+        "https://i.postimg.cc/tCWXQFfb/Screenshot-2026-04-15-141937.png",
+        "https://i.postimg.cc/g0FpMjsM/Screenshot-2026-04-15-141707.png",
+        "https://i.postimg.cc/BvT0R3wD/Screenshot-2026-04-15-141737.png",
+        "https://i.postimg.cc/FKy4wvn0/Screenshot-2026-04-15-141808.png",
+        "https://i.postimg.cc/d02YgFSJ/Screenshot-2026-04-15-141922.png"
+    ];
+
     function initiate() {
         goToNext(1);
-        document.getElementById('solemnMusic').play().catch(e => console.log("Audio blocked"));
+        document.getElementById('bgMusic').play().catch(e => console.log("Audio blocked"));
     }
 
     function goToNext(n) {
@@ -197,15 +205,13 @@
         const next = document.getElementById('s' + (n + 1));
         if(next) next.classList.add('active');
 
-        // Animation for List
-        if(n === 1) {
+        if(n === 1) startSlideshow();
+        if(n === 2) {
             for(let i=1; i<=4; i++) {
                 setTimeout(() => { document.getElementById('r'+i).classList.add('show'); }, i * 600);
             }
         }
-
-        // Animation for Cake
-        if(n === 3) {
+        if(n === 4) {
             setTimeout(() => { document.getElementById('lb').style.opacity = "1"; document.getElementById('lb').style.transform = "translateY(0)"; }, 500);
             setTimeout(() => { document.getElementById('lm').style.opacity = "1"; document.getElementById('lm').style.transform = "translateY(0)"; }, 1200);
             setTimeout(() => { document.getElementById('lt').style.opacity = "1"; document.getElementById('lt').style.transform = "translateY(0)"; }, 1900);
@@ -213,27 +219,29 @@
         }
     }
 
-    // Create Twinkling Stars
+    function startSlideshow() {
+        const slide = document.getElementById('slideshow');
+        let i = 0;
+        slide.style.backgroundImage = `url(${images[0]})`;
+        setInterval(() => { i = (i + 1) % images.length; slide.style.backgroundImage = `url(${images[i]})`; }, 3000);
+    }
+
+    // Stars & Butterflies
     const bg = document.getElementById('bg');
     for(let i=0; i<50; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        star.style.width = Math.random() * 3 + 'px';
-        star.style.height = star.style.width;
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
+        star.style.width = Math.random() * 3 + 'px'; star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + 'vw'; star.style.top = Math.random() * 100 + 'vh';
         star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
         bg.appendChild(star);
     }
-
-    // Create Butterflies
-    const particles = ['🦋', '🦋', '✨', '⭐'];
+    const particles = ['🦋', '✨', '⭐'];
     for(let i=0; i<12; i++) {
         const p = document.createElement('div');
         p.className = 'butterfly';
         p.innerHTML = particles[Math.floor(Math.random()*particles.length)];
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.top = Math.random() * 100 + "vh";
+        p.style.left = Math.random() * 100 + "vw"; p.style.top = Math.random() * 100 + "vh";
         p.style.animationDelay = (Math.random() * 10) + "s";
         document.body.appendChild(p);
     }
